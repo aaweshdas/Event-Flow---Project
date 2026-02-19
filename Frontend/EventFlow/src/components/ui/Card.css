@@ -1,0 +1,41 @@
+.card {
+    padding: var(--spacing-lg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 400ms var(--ease-out-expo),
+        box-shadow 400ms var(--ease-out-expo),
+        border-color 400ms var(--ease-out-expo);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(99, 102, 241, 0.1);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0;
+    transition: opacity 400ms var(--ease-out-expo);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Smooth image zoom in cards */
+.card img {
+    transition: transform 600ms var(--ease-out-expo);
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}

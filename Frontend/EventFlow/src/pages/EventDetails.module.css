@@ -1,0 +1,183 @@
+.banner {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: white;
+    margin-bottom: 3rem;
+}
+
+.bannerOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 33, 71, 0.9) 100%);
+}
+
+.bannerContent {
+    position: relative;
+    container: var(--container-max-width);
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem 1.5rem;
+}
+
+.backLink {
+    position: absolute;
+    top: 2rem;
+    left: 1.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.backLink:hover {
+    opacity: 1;
+}
+
+.category {
+    display: inline-block;
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    padding: 0.25rem 1rem;
+    border-radius: 99px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    align-self: flex-start;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.meta {
+    display: flex;
+    gap: 2rem;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    flex-wrap: wrap;
+}
+
+.meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contentGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    padding-bottom: 4rem;
+}
+
+.section {
+    margin-bottom: 3rem;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-bg-light);
+    padding-bottom: 0.5rem;
+}
+
+.description {
+    font-size: 1.1rem;
+    color: var(--color-text-main);
+    line-height: 1.8;
+}
+
+.highlightsList {
+    list-style: disc;
+    padding-left: 1.5rem;
+}
+
+.highlightsList li {
+    margin-bottom: 0.5rem;
+    color: var(--color-text-main);
+}
+
+.registrationCard {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+}
+
+.cardTitle {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.capacityInfo {
+    margin-bottom: 1.5rem;
+}
+
+.capacityHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-muted);
+}
+
+.progressBar {
+    height: 8px;
+    background-color: var(--color-bg-light);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progressFill {
+    height: 100%;
+    background-color: var(--color-primary);
+    border-radius: 4px;
+}
+
+.capacityText {
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.loginPrompt {
+    text-align: center;
+}
+
+.loginPrompt p {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+.shareBtn {
+    width: 100%;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .contentGrid {
+        grid-template-columns: 1fr;
+    }
+}

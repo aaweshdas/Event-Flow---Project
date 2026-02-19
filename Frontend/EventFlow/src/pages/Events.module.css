@@ -1,0 +1,27 @@
+.eventsPage {
+    background-color: var(--color-bg-light);
+    min-height: 100vh;
+}
+
+.header {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.pageTitle {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.pageSubtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}

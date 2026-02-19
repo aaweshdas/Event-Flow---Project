@@ -1,0 +1,204 @@
+.authPage {
+    min-height: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    /* Rich University Background */
+    background-image:
+        linear-gradient(135deg, rgba(145, 148, 151, 0.4) 0%, rgba(165, 173, 182, 0.2) 10000%),
+        url('../assets/login_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Animated geometric shapes in background */
+.authPage::before,
+.authPage::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.6;
+}
+
+.authPage::before {
+    width: 300px;
+    height: 300px;
+    background: var(--color-secondary);
+    top: -100px;
+    left: -100px;
+    animation: float 20s infinite alternate;
+}
+
+.authPage::after {
+    width: 400px;
+    height: 400px;
+    background: #4a90e2;
+    /* Softer blue accent */
+    bottom: -100px;
+    right: -100px;
+    animation: float 15s infinite alternate-reverse;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(50px, 50px);
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    z-index: 1;
+    /* Above background elements */
+}
+
+.card {
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    border-top: 5px solid var(--color-secondary);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.title {
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+}
+
+.toggleContainer {
+    display: flex;
+    background-color: rgba(0, 33, 71, 0.05);
+    /* Very light primary tint */
+    padding: 0.35rem;
+    border-radius: var(--border-radius-md);
+    margin-bottom: 2.5rem;
+}
+
+.toggleBtn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.85rem;
+    border: none;
+    background: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: var(--font-body);
+}
+
+.toggleBtn:hover {
+    color: var(--color-primary);
+}
+
+.active {
+    background-color: white;
+    color: var(--color-primary);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transform: scale(1.02);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-primary);
+    margin-left: 2px;
+}
+
+.input {
+    padding: 1rem;
+    border: 2px solid transparent;
+    background-color: #f0f4f8;
+    border-radius: var(--border-radius-md);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.input:focus {
+    outline: none;
+    background-color: white;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+}
+
+.error {
+    background-color: #fff5f5;
+    color: #c53030;
+    padding: 0.75rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    text-align: center;
+    border: 1px solid #feb2b2;
+}
+
+.submitBtn {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 33, 71, 0.3);
+}
+
+.submitBtn:hover {
+    box-shadow: 0 6px 20px rgba(0, 33, 71, 0.4);
+    transform: translateY(-2px);
+}
+
+.submitBtn:disabled {
+    background: #cbd5e0;
+    transform: none;
+    box-shadow: none;
+}
