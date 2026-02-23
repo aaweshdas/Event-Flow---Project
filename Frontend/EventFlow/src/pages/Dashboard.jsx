@@ -10,12 +10,17 @@ import {
     Search, Bell, Settings, LogOut, Plus, Eye, QrCode,
     GraduationCap, Star, ChevronRight
 } from 'lucide-react';
+import ManageEventsTab from '../components/admin/ManageEventsTab';
+import StudentsTab from '../components/admin/StudentsTab';
+import ReportsTab from '../components/admin/ReportsTab';
+import NotificationDropdown from '../components/ui/NotificationDropdown';
 import './Dashboard.css';
 
 const Dashboard = () => {
     const { user, logout } = useAuth();
     const { events } = useEvents();
     const [activeTab, setActiveTab] = useState('overview');
+    const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     const [registeredIds, setRegisteredIds] = useState(['evt-1', 'evt-2']);
     const [registeringId, setRegisteringId] = useState(null);
 
@@ -110,9 +115,16 @@ const Dashboard = () => {
                             }
                         </p>
                     </div>
-                    <div className="topbar-actions">
-                        <button className="topbar-icon-btn"><Bell size={20} /></button>
+                    <div className="topbar-actions" style={{ position: 'relative' }}>
+                        <button className="topbar-icon-btn" id="notification-btn" onClick={() => setIsNotificationOpen(!isNotificationOpen)}>
+                            <Bell size={20} />
+                        </button>
                         <button className="topbar-icon-btn"><Search size={20} /></button>
+                        <NotificationDropdown
+                            isOpen={isNotificationOpen}
+                            onClose={() => setIsNotificationOpen(false)}
+                            toggleButtonId="notification-btn"
+                        />
                     </div>
                 </header>
 
@@ -475,15 +487,19 @@ const Dashboard = () => {
                             </motion.div>
                         )}
 
-                        {/* Admin manage/students/reports tabs – placeholders */}
-                        {(activeTab === 'manage-events' || activeTab === 'students' || activeTab === 'reports') && (
-                            <motion.div key="admin-placeholder" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                                <div className="empty-state" style={{ marginTop: '4rem' }}>
-                                    <Settings size={48} />
-                                    <h3>Coming Soon</h3>
-                                    <p>This section is under development.</p>
-                                </div>
-                            </motion.div>
+                        {/* ─── ADMIN: Manage Events Tab ─── */}
+                        {activeTab === 'manage-events' && user.role === 'admin' && (
+                            <ManageEventsTab />
+                        )}
+
+                        {/* ─── ADMIN: Students Tab ─── */}
+                        {activeTab === 'students' && user.role === 'admin' && (
+                            <StudentsTab />
+                        )}
+
+                        {/* ─── ADMIN: Reports Tab ─── */}
+                        {activeTab === 'reports' && user.role === 'admin' && (
+                            <ReportsTab />
                         )}
                     </AnimatePresence>
                 </div>

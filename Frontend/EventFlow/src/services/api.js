@@ -57,11 +57,12 @@ const generateEvents = () => {
             description: `Join us for the ${sample.title}. This is a premier event under the ${sample.category} category. Don't miss out on this opportunity to learn and network.`,
             image: sample.image,
             capacity: 50 + (index * 5),
-            registered: Math.floor(Math.random() * 40)
+            registered: Math.floor(Math.random() * 40),
+            status: 'Upcoming'
         });
     });
 
-    // Generate random filler events to reach ~50 total if needed (optional, keeping it clean with samples + some extras)
+    // Generate random filler events
     const extraCount = 60 - events.length;
     for (let i = 0; i < extraCount; i++) {
         const date = new Date();
@@ -78,14 +79,47 @@ const generateEvents = () => {
             description: `A general gathering for ${cat} enthusiasts.`,
             image: MOCK_SAMPLES.find(s => s.category === cat)?.image || 'https://via.placeholder.com/400',
             capacity: 60,
-            registered: Math.floor(Math.random() * 20)
+            registered: Math.floor(Math.random() * 20),
+            status: 'Upcoming'
         });
     }
 
     return events;
 };
 
-const MOCK_EVENTS = generateEvents();
+// Use let so we can mutate the array in memory for the mock
+let MOCK_EVENTS = generateEvents();
+
+const MOCK_STUDENTS = [
+    { id: 's1', name: 'Rahul Kumar', email: 'rahul.k@aditya.edu', department: 'Computer Science', enrollmentYear: '2024', status: 'Active' },
+    { id: 's2', name: 'Priya Sharma', email: 'priya.s@aditya.edu', department: 'Information Technology', enrollmentYear: '2023', status: 'Active' },
+    { id: 's3', name: 'Amit Singh', email: 'amit.s@aditya.edu', department: 'Mechanical', enrollmentYear: '2022', status: 'Active' },
+    { id: 's4', name: 'Neha Gupta', email: 'neha.g@aditya.edu', department: 'Civil Engineering', enrollmentYear: '2024', status: 'On Leave' },
+    { id: 's5', name: 'Vikram Reddy', email: 'vikram.r@aditya.edu', department: 'Electrical', enrollmentYear: '2025', status: 'Active' },
+    { id: 's6', name: 'Anjali Verma', email: 'anjali.v@aditya.edu', department: 'Computer Science', enrollmentYear: '2023', status: 'Inactive' },
+    { id: 's7', name: 'Rohan Desai', email: 'rohan.d@aditya.edu', department: 'Business Admin', enrollmentYear: '2022', status: 'Active' },
+    { id: 's8', name: 'Kavya Nair', email: 'kavya.n@aditya.edu', department: 'Data Science', enrollmentYear: '2024', status: 'Active' }
+];
+
+const MOCK_REPORTS = {
+    overview: {
+        totalStudents: 2450,
+        activeEvents: 56,
+        totalRegistrations: 1208,
+        engagementGrowth: '+18%'
+    },
+    attendanceByCategory: [
+        { category: 'Technology', attendees: 450 },
+        { category: 'Cultural', attendees: 820 },
+        { category: 'Sports', attendees: 310 },
+        { category: 'Academic', attendees: 590 }
+    ],
+    recentRegistrations: [
+        { student: 'Rahul Kumar', event: 'AI Workshop', date: 'Just now' },
+        { student: 'Priya Sharma', event: 'Robotics Hackathon', date: '2 hours ago' },
+        { student: 'Amit Singh', event: 'Music Festival', date: '5 hours ago' }
+    ]
+};
 
 const mockDelay = (ms = 500) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -168,5 +202,45 @@ export const api = {
     registerForEvent: async (eventId) => {
         await mockDelay(800);
         return { success: true, message: 'Registration Successful!' };
+    },
+
+    // --- Admin Endpoints ---
+
+    createEvent: async (eventData) => {
+        await mockDelay(600);
+        const newEvent = {
+            id: `evt-new-${Date.now()}`,
+            registered: 0,
+            status: 'Upcoming',
+            ...eventData
+        };
+        // Prepend to show up first
+        MOCK_EVENTS = [newEvent, ...MOCK_EVENTS];
+        return newEvent;
+    },
+
+    updateEvent: async (id, eventData) => {
+        await mockDelay(600);
+        const index = MOCK_EVENTS.findIndex(e => e.id === id);
+        if (index === -1) throw new Error('Event not found');
+        
+        MOCK_EVENTS[index] = { ...MOCK_EVENTS[index], ...eventData };
+        return MOCK_EVENTS[index];
+    },
+
+    deleteEvent: async (id) => {
+        await mockDelay(600);
+        MOCK_EVENTS = MOCK_EVENTS.filter(e => e.id !== id);
+        return { success: true };
+    },
+
+    getStudents: async () => {
+        await mockDelay(500);
+        return MOCK_STUDENTS;
+    },
+
+    getReports: async () => {
+        await mockDelay(700);
+        return MOCK_REPORTS;
     }
 };

@@ -51,6 +51,50 @@ export function EventProvider({ children }) {
         // The main useEffect execution will handle the fetch
     }, [filters]);
 
+    const createEvent = async (eventData) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const newEvent = await api.createEvent(eventData);
+            setEvents(prev => [newEvent, ...prev]);
+            return newEvent;
+        } catch (err) {
+            setError(err.message || 'Failed to create event');
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const updateEvent = async (id, eventData) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const updated = await api.updateEvent(id, eventData);
+            setEvents(prev => prev.map(e => e.id === id ? updated : e));
+            return updated;
+        } catch (err) {
+            setError(err.message || 'Failed to update event');
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const deleteEvent = async (id) => {
+        setLoading(true);
+        setError(null);
+        try {
+            await api.deleteEvent(id);
+            setEvents(prev => prev.filter(e => e.id !== id));
+        } catch (err) {
+            setError(err.message || 'Failed to delete event');
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const value = {
         events,
         loading,
@@ -60,7 +104,10 @@ export function EventProvider({ children }) {
         loadMore,
         fetchEvents,
         filters,
-        updateFilters
+        updateFilters,
+        createEvent,
+        updateEvent,
+        deleteEvent
     };
 
     return (
