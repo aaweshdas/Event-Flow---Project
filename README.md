@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" alt="EventFlow Logo" width="80" height="80>
+  <img src="logo.png" alt="EventFlow Logo" width="180">
 </p>
 
 # 🎉 EventFlow: The Unified University Event Management Ecosystem
